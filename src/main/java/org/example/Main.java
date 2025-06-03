@@ -9,7 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
-    String chromeDriverPath = "/Workspace/chromedriver/chromedriver.exe";
+    //String chromeDriverPath = "/Workspace/chromedriver/chromedriver.exe";
+    String chromeDriverPath = "/Users/martinlequerica/Documents/webdriver/chromedriver-mac-arm64/chromedriver";
+
     public static void main(String[] args) {
         System.out.println("Todo listo para la ejecucion.");
         new Main();
@@ -25,10 +27,12 @@ public class Main {
         System.out.println("Lista de usuarios cargados.");
 
         List<FormA> usuarios = new ArrayList<>();
-        usuarios.add(usuario1);/*
+        usuarios.add(usuario1);
+        /*
         usuarios.add(usuario2);
         usuarios.add(usuario3);
-        usuarios.add(usuario4);*/
+        usuarios.add(usuario4);
+        */
 
         for(FormA usuario: usuarios){
             System.out.println("Usuario creado. Nombre: "+usuario.getFirstName()+" "+usuario.getLastName());
