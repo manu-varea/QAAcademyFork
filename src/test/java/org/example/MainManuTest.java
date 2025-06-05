@@ -1,12 +1,10 @@
 package org.example;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.openqa.selenium.Alert;
+import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.util.ArrayList;
@@ -14,6 +12,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class MainManuTest {
     private WebDriver driver;
     private String chromeDriverPath = "src/main/resources/chromedriver.exe";
@@ -24,12 +23,12 @@ public class MainManuTest {
         driver = new ChromeDriver();
     }
 
-//    @AfterEach
-//    public void destroy(){
-//        if(driver != null){
-//            driver.quit();
-//        }
-//    }
+    @AfterEach
+    public void destroy(){
+        if(driver != null){
+            driver.quit();
+        }
+    }
 
     private List<User> obtenerUsuarios(){
         List<User> usuarios = new ArrayList<>();
@@ -48,11 +47,20 @@ public class MainManuTest {
         return usuarios;
     }
 
+    private void sleep(int seconds){
+        int ms = seconds * 1000;
+        try{
+          Thread.sleep(ms);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     @Test
+    @Order(1)
     public void testContinuidadQA(){
 
         List<User> usuarios = obtenerUsuarios();
-
         driver.get("http://127.0.0.1:5500/HomePage.html");
         driver.findElement(By.xpath("(//a[normalize-space()='Registro de Jugador'])[1]")).click();
 
@@ -100,28 +108,58 @@ public class MainManuTest {
 
             alerta.accept();
         }
-
         // debido al error de la entrega del form,
         // vuelvo a entrar a la page de registro para seguir con el test
         driver.get("http://127.0.0.1:5500/registro.html");
         driver.findElement(By.xpath("(//a[normalize-space()='Equipos asignados'])[1]")).click();
-
     }
 
     @Test
-    public void equiposTest(){
-        List<User> usuarios = obtenerUsuarios();
+    @Order(2)
+    public void testEquiposYNombre(){
         driver.get("http://127.0.0.1:5500/equipos.html");
+
+        WebElement dropDown = driver.findElement(By.xpath("(//a[normalize-space()='Welcome QA Trainee'])[1]"));
+        dropDown.click();
+
+        WebElement botonNombre = driver.findElement(By.xpath("(//a[normalize-space()='Nombre Equipo'])[1]"));
+        botonNombre.click();
+
+        WebElement inputNombre = driver.findElement(By.xpath("(//input[@name='nombre_equipo'])[1]"));
+        inputNombre.sendKeys("LosQA");
+
+        WebElement botonGuardar = driver.findElement(By.xpath("(//button[normalize-space()='Guardar Nombre'])[1]"));
+        botonGuardar.click();
+
+        Alert alerta = driver.switchTo().alert();
+        String alertaText = alerta.getText();
+
+        assertEquals("Nombre del equipo guardado correctamente.", alertaText);
+
+        alerta.accept();
+
+        driver.get("http://127.0.0.1:5500/mail_equipo_creado.html");
+    }
+
+    @Test
+    @Order(3)
+    public void testValores(){
+        List<User> usuarios = obtenerUsuarios();
+        driver.get("http://127.0.0.1:5500/mail_equipo_creado.html");
         int i = 1;
+        String textoPage;
+        String textoArmado;
         for(User usuario : usuarios) {
-            String textoPage = driver.findElement(By.xpath("/html[1]/body[1]/div[1]/div[1]/div[1]/div[3]/dl[1]/ul[1]/li["+i+"]")).getText();
-            String textoArmado = usuario.getRolPrincipal().toUpperCase() + ": " + usuario.getNombre() + " (Nivel: " + usuario.getNivel() + ")";
-            System.out.println(textoPage);
-            System.out.println(textoArmado);
+            if(i == 1){
+                textoPage = driver.findElement(By.xpath("//div[@class='container']//li[" + i + "]")).getText();
+                textoArmado = "Líder: " + usuario.getNombre() + " (IGN: " + usuario.getIgn() + ", Discord: " + usuario.getDiscordUser() + ")";
+            } else {
+                textoPage = driver.findElement(By.xpath("//div[@class='container']//li[" + (i + 1) + "]")).getText();
+                textoArmado = usuario.getRolPrincipal().toUpperCase() + ": " + usuario.getNombre() + " (IGN: " + usuario.getIgn() + ")";
+            }
             i++;
             assertEquals(textoArmado, textoPage);
         }
-
+        sleep(5);
     }
-
 }
