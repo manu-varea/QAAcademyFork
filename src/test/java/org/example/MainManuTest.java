@@ -7,15 +7,26 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class MainManuTest {
     private WebDriver driver;
-    private String chromeDriverPath = "src/main/resources/chromedriver.exe";
+    private String chromeDriverPath = "src/test/resources/chromedriver.exe";
+    String pathTorneoHTML;
+
+    {
+        try {
+            pathTorneoHTML = getClass().getClassLoader().getResource("TorneoHTML/").toURI().toString();
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     @BeforeEach
     public void setUp(){
@@ -46,7 +57,8 @@ public class MainManuTest {
 
         return usuarios;
     }
-
+    //Metodo usado para que el testing sea visible para el tester,
+    // no se remueve por si es necesario utilizarlo nuevamente
     private void sleep(int seconds){
         int ms = seconds * 1000;
         try{
@@ -61,16 +73,12 @@ public class MainManuTest {
     public void testContinuidadQA(){
 
         List<User> usuarios = obtenerUsuarios();
-        driver.get("http://127.0.0.1:5500/HomePage.html");
+        driver.get(pathTorneoHTML+"HomePage.html");
         driver.findElement(By.xpath("(//a[normalize-space()='Registro de Jugador'])[1]")).click();
 
-        //#1. cargar los 5 usuarios
+        //1. Cargo los 5 jugadores.
         for(User usuario : usuarios) {
-            // para registrar multiples usuarios sin contar el primero,
-            // ya que este ingreso clickeando en la page
-            if(usuario.getDiscordUser().isEmpty()) {
-                driver.get("http://127.0.0.1:5500/registro.html");
-            }
+
             WebElement fieldNombre = driver.findElement(By.xpath("(//input[@name='nombre'])[1]"));
             fieldNombre.sendKeys(usuario.getNombre());
 
@@ -108,17 +116,16 @@ public class MainManuTest {
 
             alerta.accept();
         }
-        // debido al error de la entrega del form,
-        // vuelvo a entrar a la page de registro para seguir con el test
-        driver.get("http://127.0.0.1:5500/registro.html");
         driver.findElement(By.xpath("(//a[normalize-space()='Equipos asignados'])[1]")).click();
     }
 
     @Test
     @Order(2)
     public void testEquiposYNombre(){
-        driver.get("http://127.0.0.1:5500/equipos.html");
+        //2.Voy a Equipos Asignados, me fijo que aparezcan.
+        driver.get(pathTorneoHTML+"equipos.html");
 
+        //3. Voy al header, Cambiar nombre.
         WebElement dropDown = driver.findElement(By.xpath("(//a[normalize-space()='Welcome QA Trainee'])[1]"));
         dropDown.click();
 
@@ -128,38 +135,47 @@ public class MainManuTest {
         WebElement inputNombre = driver.findElement(By.xpath("(//input[@name='nombre_equipo'])[1]"));
         inputNombre.sendKeys("LosQA");
 
+        //4. Le doy a guardar nombre.
         WebElement botonGuardar = driver.findElement(By.xpath("(//button[normalize-space()='Guardar Nombre'])[1]"));
         botonGuardar.click();
 
+        //5.Valido mensaje exitoso
         Alert alerta = driver.switchTo().alert();
         String alertaText = alerta.getText();
 
         assertEquals("Nombre del equipo guardado correctamente.", alertaText);
 
         alerta.accept();
-
-        driver.get("http://127.0.0.1:5500/mail_equipo_creado.html");
     }
 
     @Test
     @Order(3)
     public void testValores(){
+        //6. Valido que los datos del equipo sean correctos.
         List<User> usuarios = obtenerUsuarios();
-        driver.get("http://127.0.0.1:5500/mail_equipo_creado.html");
+        driver.get(pathTorneoHTML+"mail_equipo_creado.html");
         int i = 1;
-        String textoPage;
-        String textoArmado;
+
+        String msgExpected = "Te informamos que tu equipo, LosQA, ha sido conformado exitosamente. A continuación te compartimos los datos de tus compañeros:";
+        String msgActual = driver.findElement(By.xpath("//div[@class='panel-body']/dl/p[2]")).getText();
+
+        //dos maneras diferentes de testear el mensaje
+        assertEquals(msgExpected, msgActual);
+        assertTrue(msgActual.contains("LosQA"));
+
+        String jugadorExpected;
+        String jugadorActual;
+
         for(User usuario : usuarios) {
             if(i == 1){
-                textoPage = driver.findElement(By.xpath("//div[@class='container']//li[" + i + "]")).getText();
-                textoArmado = "Líder: " + usuario.getNombre() + " (IGN: " + usuario.getIgn() + ", Discord: " + usuario.getDiscordUser() + ")";
+                jugadorExpected = "Líder: " + usuario.getNombre() + " (IGN: " + usuario.getIgn() + ", Discord: " + usuario.getDiscordUser() + ")";
+                jugadorActual = driver.findElement(By.xpath("//div[@class='container']//li[" + i + "]")).getText();
             } else {
-                textoPage = driver.findElement(By.xpath("//div[@class='container']//li[" + (i + 1) + "]")).getText();
-                textoArmado = usuario.getRolPrincipal().toUpperCase() + ": " + usuario.getNombre() + " (IGN: " + usuario.getIgn() + ")";
+                jugadorExpected = usuario.getRolPrincipal().toUpperCase() + ": " + usuario.getNombre() + " (IGN: " + usuario.getIgn() + ")";
+                jugadorActual = driver.findElement(By.xpath("//div[@class='container']//li[" + (i + 1) + "]")).getText();
             }
             i++;
-            assertEquals(textoArmado, textoPage);
+            assertEquals(jugadorExpected, jugadorActual);
         }
-        sleep(5);
     }
 }
