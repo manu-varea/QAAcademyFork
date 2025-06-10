@@ -178,4 +178,17 @@ public class MainManuTest {
             assertEquals(jugadorExpected, jugadorActual);
         }
     }
+    @Test
+    @Order(4)
+    public void campoVacioRegistroTest() {
+        driver.get(pathTorneoHTML + "registro.html");
+        WebElement botonSubmit = driver.findElement(By.xpath("(//button[normalize-space()='Registrarse'])[1]"));
+        botonSubmit.click();
+
+        //POR ALGUNA RAZON NO CONCUERDA CON LO MOSTRADO EN PANTALLA
+        String validationText = driver.findElement(By.name("nombre")).getAttribute("validationMessage");
+
+        assertEquals("Rellena este campo.", validationText);
+
+    }
 }
