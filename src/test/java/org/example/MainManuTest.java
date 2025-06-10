@@ -70,7 +70,7 @@ public class MainManuTest {
 
     @Test
     @Order(1)
-    public void testContinuidadQA(){
+    public void continuidadQATest(){
 
         List<User> usuarios = obtenerUsuarios();
         driver.get(pathTorneoHTML+"HomePage.html");
@@ -121,7 +121,7 @@ public class MainManuTest {
 
     @Test
     @Order(2)
-    public void testEquiposYNombre(){
+    public void equiposYNombreTest(){
         //2.Voy a Equipos Asignados, me fijo que aparezcan.
         driver.get(pathTorneoHTML+"equipos.html");
 
@@ -150,7 +150,7 @@ public class MainManuTest {
 
     @Test
     @Order(3)
-    public void testValores(){
+    public void valoresTest(){
         //6. Valido que los datos del equipo sean correctos.
         List<User> usuarios = obtenerUsuarios();
         driver.get(pathTorneoHTML+"mail_equipo_creado.html");
