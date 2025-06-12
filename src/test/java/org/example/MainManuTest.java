@@ -247,20 +247,23 @@ public class MainManuTest {
         driver.get(pathTorneoHTML + "registro.html");
         WebElement boton = driver.findElement(By.xpath("(//button[normalize-space()='Registrarse'])[1]"));
         List<WebElement> campos = obtenerCampos();
-        String[] usuario = {"Andres", "1122227788", "ndres@test.com",
+        String[] usuario = {"Andres", "1122227788", "test.com",
                 "axdny", "85", "Top", "Argentina"};
         Map<String, String> mensajes = new HashMap<>();
         mensajes.put("mensajeCampo", "Completa este campo");
         mensajes.put("mensajeLista", "Selecciona un elemento de la lista");
-        mensajes.put("mensajeMail", "Incluye un signo \"@\" en la dirección de correo electrónico. La dirección \"a\" no incluye el signo \"@\".");
+        mensajes.put("mensajeMail", "Incluye un signo \"@\" en la dirección de correo electrónico. La dirección \"andres\" no incluye el signo \"@\".");
+        mensajes.put("mensajeMail2", "Escribe una parte después del símbolo \"@\".\"andres@\" está incompleto");
         int i = 0;
 
         for (WebElement campo : campos) {
             boton.click();
             if (campo.getAccessibleName().equals("Email: ")) {
                 verificarMensajeValidacion(campo, mensajes.get("mensajeCampo"));
-                campo.sendKeys("a");
+                campo.sendKeys("andres");
                 verificarMensajeValidacion(campo, mensajes.get("mensajeMail"));
+                campo.sendKeys("@");
+                verificarMensajeValidacion(campo, mensajes.get("mensajeMail2"));
             } else if (campo.getAccessibleName().equals("Rol Principal: ") || campo.getAccessibleName().equals("País: ")) {
                 verificarMensajeValidacion(campo, mensajes.get("mensajeLista"));
             } else {
