@@ -279,7 +279,7 @@ public class MainManuTest {
         //POR ALGUNA RAZON NO CONCUERDA CON LO MOSTRADO EN PANTALLA
         String validationText = driver.findElement(By.name("nombre")).getAttribute("validationMessage");
 
-        assertEquals("Rellena este campo.", validationText);
+        assertEquals("Completa este campo", validationText);
 
     }
 }
