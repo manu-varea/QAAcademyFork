@@ -9,7 +9,9 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -271,12 +273,52 @@ public class MainManuTest {
     @Test
     public void campoVacioRegistroTest() {
         driver.get(pathTorneoHTML + "registro.html");
-        WebElement botonSubmit = driver.findElement(By.xpath("(//button[normalize-space()='Registrarse'])[1]"));
-        botonSubmit.click();
+        WebElement boton = driver.findElement(By.xpath("(//button[normalize-space()='Registrarse'])[1]"));
+        List<WebElement> campos = obtenerCampos();
+        String[] usuario = {"Andres", "1122227788", "ndres@test.com",
+                "axdny", "85", "Top", "Argentina"};
+        Map<String, String> mensajes = new HashMap<>();
+        mensajes.put("mensajeCampo", "Completa este campo");
+        mensajes.put("mensajeLista", "Selecciona un elemento de la lista");
+        mensajes.put("mensajeMail", "Incluye un signo \"@\" en la dirección de correo electrónico. La dirección \"a\" no incluye el signo \"@\".");
+        int i = 0;
 
-        String validationText = driver.findElement(By.name("nombre")).getAttribute("validationMessage");
-
-        assertEquals("Completa este campo", validationText);
-
+        for (WebElement campo : campos) {
+            boton.click();
+            if (campo.getAccessibleName().equals("Email: ")) {
+                verificarMensajeValidacion(campo, mensajes.get("mensajeCampo"));
+                campo.sendKeys("a");
+                verificarMensajeValidacion(campo, mensajes.get("mensajeMail"));
+            } else if (campo.getAccessibleName().equals("Rol Principal: ") || campo.getAccessibleName().equals("País: ")) {
+                verificarMensajeValidacion(campo, mensajes.get("mensajeLista"));
+            } else {
+                verificarMensajeValidacion(campo, mensajes.get("mensajeCampo"));
+            }
+            campo.sendKeys(usuario[i]);
+            i++;
+        }
+        boton.click();
+        driver.switchTo().alert().accept();
     }
+
+    private void verificarMensajeValidacion(WebElement campo, String mensajeEsperado ) {
+        String validationText = campo.getAttribute("validationMessage");
+
+        assertEquals(mensajeEsperado, validationText);
+    }
+
+    private List<WebElement> obtenerCampos(){
+        List<WebElement> campos = new ArrayList<>();
+
+        campos.add(driver.findElement(By.xpath("(//input[@name='nombre'])[1]")));
+        campos.add(driver.findElement(By.xpath("(//input[@name='telefono'])[1]")));
+        campos.add(driver.findElement(By.xpath("(//input[@name='email'])[1]")));
+        campos.add(driver.findElement(By.xpath("(//input[@name='ign'])[1]")));
+        campos.add(driver.findElement(By.xpath("(//input[@name='nivel'])[1]")));
+        campos.add(driver.findElement(By.xpath("(//select[@name='rol_principal'])[1]")));
+        campos.add(driver.findElement(By.xpath("(//select[@name='pais'])[1]")));
+
+        return campos;
+    }
+
 }
