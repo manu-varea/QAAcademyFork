@@ -253,7 +253,7 @@ public class MainManuTest {
         mensajes.put("mensajeCampo", "Completa este campo");
         mensajes.put("mensajeLista", "Selecciona un elemento de la lista");
         mensajes.put("mensajeMail", "Incluye un signo \"@\" en la dirección de correo electrónico. La dirección \"andres\" no incluye el signo \"@\".");
-        mensajes.put("mensajeMail2", "Escribe una parte después del símbolo \"@\".\"andres@\" está incompleto");
+        mensajes.put("mensajeMail2", "Ingresa texto después del signo \"@\". La dirección \"andres@\" está incompleta.");
         int i = 0;
 
         for (WebElement campo : campos) {
