@@ -8,10 +8,10 @@ import org.openqa.selenium.Alert;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.net.URISyntaxException;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
+import java.util.ArrayList;
 import java.util.Map;
+import java.util.HashMap;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -247,13 +247,9 @@ public class MainManuTest {
         driver.get(pathTorneoHTML + "registro.html");
         WebElement boton = driver.findElement(By.xpath("(//button[normalize-space()='Registrarse'])[1]"));
         List<WebElement> campos = obtenerCampos();
+        Map<String, String> mensajes = obtenerMensajes();
         String[] usuario = {"Andres", "1122227788", "test.com",
                 "axdny", "85", "Top", "Argentina"};
-        Map<String, String> mensajes = new HashMap<>();
-        mensajes.put("mensajeCampo", "Completa este campo");
-        mensajes.put("mensajeLista", "Selecciona un elemento de la lista");
-        mensajes.put("mensajeMail", "Incluye un signo \"@\" en la dirección de correo electrónico. La dirección \"andres\" no incluye el signo \"@\".");
-        mensajes.put("mensajeMail2", "Ingresa texto después del signo \"@\". La dirección \"andres@\" está incompleta.");
         int i = 0;
 
         for (WebElement campo : campos) {
@@ -295,6 +291,7 @@ public class MainManuTest {
     }
 
     private List<WebElement> obtenerCampos(){
+
         List<WebElement> campos = new ArrayList<>();
 
         campos.add(driver.findElement(By.xpath("(//input[@name='nombre'])[1]")));
@@ -308,11 +305,23 @@ public class MainManuTest {
         return campos;
     }
 
+    private Map<String, String> obtenerMensajes() {
+
+        Map<String, String> mensajes = new HashMap<>();
+
+        mensajes.put("mensajeCampo", "Completa este campo");
+        mensajes.put("mensajeLista", "Selecciona un elemento de la lista");
+        mensajes.put("mensajeMail", "Incluye un signo \"@\" en la dirección de correo electrónico. La dirección \"andres\" no incluye el signo \"@\".");
+        mensajes.put("mensajeMail2", "Ingresa texto después del signo \"@\". La dirección \"andres@\" está incompleta.");
+
+        return mensajes;
+    }
+
     private void verificarMensajeValidacion(WebElement campo, String mensajeEsperado ) {
         String validationText = campo.getAttribute("validationMessage");
-
         assertEquals(mensajeEsperado, validationText);
     }
+
     //Metodo usado para que el testing sea visible para el tester,
     // no se remueve por si es necesario utilizarlo nuevamente
     private void sleep(int seconds){
