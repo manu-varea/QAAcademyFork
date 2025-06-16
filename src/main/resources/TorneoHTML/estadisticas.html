@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title>QA Academy - Estadisticas</title> <!---->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <style>
+        .mejor-jugador {
+          background-color: #d4edda !important;
+          font-weight: bold;
+        }
+        body {
+          font-family: Arial, sans-serif;
+        }
+        table {
+          width: 100%;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-static-top"> <!--Menu Desplegable-->
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="https://kopiustech.com/es/">Kopius QA Academy</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li><a href="HomePage.html"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+            <li><a href="registro.html"><span class="glyphicon glyphicon-list-alt"></span> Registro de Jugador</a></li>
+            <li><a href="equipos.html"><span class="glyphicon glyphicon-upload"></span> Equipos asignados</a></li>
+            <li class="active"><a href="estadisticas.html"><span class="glyphicon glyphicon-align-left"></span> Estadisticas</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span> Welcome QA Trainee <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="#"><span class="glyphicon glyphicon-cog"></span> Opciones </a></li>
+                    <li><a href="nombre_equipo.html"><span class="glyphicon glyphicon-text-size"></span> Nombre Equipo</a></li>
+                    <li><a href="panel_admin.html"><span class="glyphicon glyphicon-calendar"></span> Fecha Torneo</a></li>
+                    <li><a href="votar_lider.html"><span class="glyphicon glyphicon-random"></span> Votar Lider</a></li>
+                    <li><a href="abandonar_equipo.html"><span class="glyphicon glyphicon-remove"></span> Abandonar Equipo</a></li>
+                    <li><a href="HomePage.html"><span class="glyphicon glyphicon-log-in"></span> Desloguear</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="container">
+    <h1>Equipos del Torneo</h1>
+    <p>Aquí se mostrarán las estadísticas del torneo que se encuentre participando:</p>
+    <table id="tablaJugadores" class="display">
+        <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Equipo</th>
+            <th>Matados</th>
+            <th>Muertes</th>
+            <th>% Victorias</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Jugadores (ordenados por %Victorias y Matados) -->
+        <tr class="mejor-jugador"><td>Renata</td><td>Equipo #8</td><td>92</td><td>14</td><td>96%</td></tr>
+        <tr><td>Alma</td><td>Equipo #8</td><td>10</td><td>81</td><td>96%</td></tr>
+        <tr><td>Lara</td><td>Equipo #8</td><td>44</td><td>45</td><td>96%</td></tr>
+        <tr><td>Clara</td><td>Equipo #8</td><td>67</td><td>29</td><td>96%</td></tr>
+        <tr><td>Bianca</td><td>Equipo #8</td><td>39</td><td>58</td><td>96%</td></tr>
+
+        <tr><td>Franco</td><td>Equipo #7</td><td>84</td><td>38</td><td>95%</td></tr>
+        <tr><td>Lautaro</td><td>Equipo #7</td><td>51</td><td>33</td><td>95%</td></tr>
+        <tr><td>Nicolás</td><td>Equipo #7</td><td>17</td><td>99</td><td>95%</td></tr>
+        <tr><td>Alan</td><td>Equipo #7</td><td>73</td><td>54</td><td>95%</td></tr>
+        <tr><td>Diego</td><td>Equipo #7</td><td>36</td><td>67</td><td>95%</td></tr>
+
+        <tr><td>Emma</td><td>Equipo #4</td><td>58</td><td>25</td><td>92%</td></tr>
+        <tr><td>Zoe</td><td>Equipo #4</td><td>42</td><td>31</td><td>92%</td></tr>
+        <tr><td>Olivia</td><td>Equipo #4</td><td>16</td><td>93</td><td>92%</td></tr>
+        <tr><td>Sofía</td><td>Equipo #4</td><td>69</td><td>40</td><td>92%</td></tr>
+        <tr><td>Valentina</td><td>Equipo #4</td><td>88</td><td>35</td><td>92%</td></tr>
+
+        <tr><td>Mateo</td><td>Equipo #3</td><td>93</td><td>18</td><td>88%</td></tr>
+        <tr><td>Lucas</td><td>Equipo #3</td><td>37</td><td>42</td><td>88%</td></tr>
+        <tr><td>Thiago</td><td>Equipo #3</td><td>77</td><td>34</td><td>88%</td></tr>
+        <tr><td>Bruno</td><td>Equipo #3</td><td>65</td><td>61</td><td>88%</td></tr>
+        <tr><td>Jorge</td><td>Equipo #3</td><td>29</td><td>89</td><td>88%</td></tr>
+
+        <tr><td>Mía</td><td>Equipo #6</td><td>66</td><td>23</td><td>86%</td></tr>
+        <tr><td>Catalina</td><td>Equipo #6</td><td>24</td><td>95</td><td>86%</td></tr>
+        <tr><td>Martina</td><td>Equipo #6</td><td>55</td><td>50</td><td>86%</td></tr>
+        <tr><td>Julia</td><td>Equipo #6</td><td>30</td><td>41</td><td>86%</td></tr>
+        <tr><td>Abril</td><td>Equipo #6</td><td>78</td><td>12</td><td>86%</td></tr>
+
+        <tr><td>Santiago</td><td>Equipo #5</td><td>31</td><td>27</td><td>75%</td></tr>
+        <tr><td>Benjamín</td><td>Equipo #5</td><td>91</td><td>60</td><td>75%</td></tr>
+        <tr><td>Facundo</td><td>Equipo #5</td><td>43</td><td>52</td><td>75%</td></tr>
+        <tr><td>Joaquín</td><td>Equipo #5</td><td>97</td><td>22</td><td>75%</td></tr>
+        <tr><td>Tomás</td><td>Equipo #5</td><td>15</td><td>80</td><td>75%</td></tr>
+
+        <tr><td>Federico</td><td>Equipo #2</td><td>60</td><td>20</td><td>65%</td></tr>
+        <tr><td>Axel</td><td>Equipo #2</td><td>47</td><td>39</td><td>65%</td></tr>
+        <tr><td>Kevin</td><td>Equipo #2</td><td>23</td><td>77</td><td>65%</td></tr>
+        <tr><td>Ramiro</td><td>Equipo #2</td><td>81</td><td>44</td><td>65%</td></tr>
+        <tr><td>Simón</td><td>Equipo #2</td><td>19</td><td>84</td><td>65%</td></tr>
+
+        <tr><td>Andres</td><td>Equipo #1</td><td>56</td><td>38</td><td>48%</td></tr>
+        <tr><td>Chris</td><td>Equipo #1</td><td>12</td><td>69</td><td>48%</td></tr>
+        <tr><td>Sele</td><td>Equipo #1</td><td>98</td><td>30</td><td>48%</td></tr>
+        <tr><td>Ivan</td><td>Equipo #1</td><td>33</td><td>72</td><td>48%</td></tr>
+        <tr><td>Manu</td><td>Equipo #1</td><td>75</td><td>55</td><td>48%</td></tr>
+        </tbody>
+    </table>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script>
+    $(document).ready(function() {
+      $('#tablaJugadores').DataTable({
+        pageLength: 25,
+        order: [[4, 'desc'], [2, 'desc']], // Ordena por % victoria y luego matados
+        language: {
+          search: "Buscar:",
+          lengthMenu: "Mostrar _MENU_ jugadores",
+          info: "Mostrando _START_ a _END_ de _TOTAL_ jugadores",
+          paginate: {
+            first: "Primero",
+            last: "Último",
+            next: "Siguiente",
+            previous: "Anterior"
+          }
+        }
+      });
+    });
+</script>
+</body>
+</html>
