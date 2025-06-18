@@ -1,6 +1,6 @@
 package org.example;
 
-import org.example.controller.RegistroController;
+import org.example.controller.RegistrarJugadorController;
 import org.example.controller.EquipoController;
 import org.example.controller.VistasController;
 
@@ -23,10 +23,10 @@ public class Server {
         //    response.header("Access-Control-Allow-Origin", "*");
         //    response.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
         //    response.header("Access-Control-Allow-Headers", "Content-Type");
-        //    return "OK";
+        //    return "OK"
         //});
         
-        RegistroController registroController = new RegistroController();
+        RegistrarJugadorController registrarJugadorController = new RegistrarJugadorController();
         EquipoController equipoController = new EquipoController();
         VistasController vistasController = new VistasController();
         
@@ -43,10 +43,10 @@ public class Server {
         get("/panel_admin.html", vistasController::getPanelAdminPage);
         
         // Endpoints para registros
-        post("/api/registros", registroController::agregarRegistro);
-        get("/api/registros", registroController::obtenerRegistros);
-        delete("/api/registros/:email", registroController::eliminarRegistro);
-        get("/api/registros/:email", registroController::buscarRegistro);
+        post("/api/jugadores", registrarJugadorController::registrarJugador);
+        get("/api/jugadores", registrarJugadorController::obtenerJugadores);
+        delete("/api/jugadores/:email", registrarJugadorController::eliminarJugador);
+        get("/api/jugadores/:email", registrarJugadorController::buscarJugador);
         
         // Endpoints para equipos
         post("/api/equipos", equipoController::agregarEquipo);
