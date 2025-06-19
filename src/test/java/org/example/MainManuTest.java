@@ -348,8 +348,9 @@ public class MainManuTest {
 
         mensajes.put("mensajeCampo", "Completa este campo");
         mensajes.put("mensajeLista", "Selecciona un elemento de la lista");
-        mensajes.put("mensajeMail", "Incluye un signo \"@\" en la dirección de correo electrónico. La dirección \"andres\" no incluye el signo \"@\".");
-        mensajes.put("mensajeMail2", "Ingresa texto después del signo \"@\". La dirección \"andres@\" está incompleta.");
+        mensajes.put("mensajeMail", "Incluye un signo \"@\" en la dirección de correo electrónico. La dirección \"a\" no incluye el signo \"@\".");
+        mensajes.put("mensajeMail2", "Ingresa texto después del signo \"@\". La dirección \"a@\" está incompleta.");
+        mensajes.put("mensajeNivel", "El valor debe ser mayor de o igual a 1");
 
         return mensajes;
     }
