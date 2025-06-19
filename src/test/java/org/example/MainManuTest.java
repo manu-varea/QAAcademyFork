@@ -243,6 +243,31 @@ public class MainManuTest {
     }
 
     @Test
+    @Order(4)
+    public void abandonarEquipoTest() {
+        driver.get(pathTorneoHTML+"mail_equipo_creado.html");
+
+        //clickear dropdown
+        clickear("(//a[normalize-space()='Welcome QA Trainee'])[1]");
+        //clickear opcion en el dropdown
+        clickear("(//a[normalize-space()='Abandonar Equipo'])[1]");
+
+        enviarTexto("(//input[@name='nombre_equipo'])[1]", "CONFIRMO");
+        //clickear boton abandonar
+        clickear("(//button[normalize-space()='Abandonar Equipo'])[1]");
+
+        verificarAlerta("Ha abandonado el equipo. No podrá unirse a otro en las proximas 24 horas.");
+
+        //clickear boton volver
+        clickear("(//button[@type='button'])[1]");
+
+        String jugadorActual = driver.findElement(By.xpath("//div[@class='container']//li[4]")).getText();
+
+        assertEquals("ADC: VACANTE", jugadorActual);
+
+    }
+
+    @Test
     public void campoVacioRegistroTest() {
         driver.get(pathTorneoHTML + "registro.html");
         WebElement boton = driver.findElement(By.xpath("(//button[normalize-space()='Registrarse'])[1]"));
