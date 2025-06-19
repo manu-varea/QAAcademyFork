@@ -18,14 +18,7 @@ public class Server {
             response.header("Access-Control-Allow-Headers", "Content-Type");
         });
 
-        // Habilitar OPTIONS para CORS
-        //options("/*", (request, response) -> {
-        //    response.header("Access-Control-Allow-Origin", "*");
-        //    response.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-        //    response.header("Access-Control-Allow-Headers", "Content-Type");
-        //    return "OK"
-        //});
-        
+
         RegistrarJugadorController registrarJugadorController = new RegistrarJugadorController();
         EquipoController equipoController = new EquipoController();
         VistasController vistasController = new VistasController();
@@ -45,7 +38,7 @@ public class Server {
         get("/panel_admin.html", vistasController::getPanelAdminPage);
         get("/equipo_creado", vistasController::getEquipoCreadoPage);
         get("/equipo_creado.html", vistasController::getEquipoCreadoPage);
-        
+
         // Endpoints para registros
         post("/api/jugadores", registrarJugadorController::registrarJugador);
         get("/api/jugadores", registrarJugadorController::obtenerJugadores);
@@ -55,8 +48,7 @@ public class Server {
         // Endpoints para equipos
         post("/api/equipos", equipoController::agregarEquipo);
         get("/api/equipos", equipoController::obtenerEquipos);
-        get("/api/equipos/:id", equipoController::obtenerEquipoPorId);
-        
+
         System.out.println("Servidor iniciado en http://localhost:4567");
     }
 

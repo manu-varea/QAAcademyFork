@@ -18,7 +18,7 @@ public class RegistrarJugadorController {
         System.out.println("Nombre: " + request.queryParams("nombre"));
         System.out.println("Email: " + request.queryParams("email"));
         System.out.println("Telefono: " + request.queryParams("telefono"));
-        
+
         String nombre = request.queryParams("nombre");
         String email = request.queryParams("email");
         String telefono = request.queryParams("telefono");

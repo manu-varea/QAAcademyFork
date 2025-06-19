@@ -60,33 +60,4 @@ public class EquipoController {
         return gson.toJson(equipos);
     }
 
-    public Object obtenerEquipoPorId(Request request, Response response) {
-        response.type("application/json");
-        try {
-            String nombre = String.valueOf(request.params("nombre"));
-            Equipo equipo = equipoService.buscarEquipo(nombre);
-            if (equipo != null) {
-                return gson.toJson(equipo);
-            } else {
-                response.status(404);
-                return gson.toJson(Map.of(
-                    "status", "error",
-                    "message", "Equipo no encontrado"
-                ));
-            }
-        } catch (NumberFormatException e) {
-            response.status(400);
-            return gson.toJson(Map.of(
-                "status", "error",
-                "message", "ID inválido"
-            ));
-        } catch (Exception e) {
-            response.status(500);
-            return gson.toJson(Map.of(
-                "status", "error",
-                "message", "Error interno del servidor",
-                "error", e.getMessage()
-            ));
-        }
-    }
 }
