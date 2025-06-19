@@ -253,6 +253,10 @@ public class MainManuTest {
         int i = 0;
 
         for (WebElement campo : campos) {
+            if(campo.getAccessibleName().equals("Usuario de Discord (opcional): ") || campo.getAccessibleName().equals("Rol Secundario: ")){
+                i++;
+                continue;
+            }
             boton.click();
             if (campo.getAccessibleName().equals("Email: ")) {
                 verificarMensajeValidacion(campo, mensajes.get("mensajeCampo"));
@@ -260,6 +264,12 @@ public class MainManuTest {
                 verificarMensajeValidacion(campo, mensajes.get("mensajeMail"));
                 campo.sendKeys("@");
                 verificarMensajeValidacion(campo, mensajes.get("mensajeMail2"));
+                campo.clear();
+            } else if (campo.getAccessibleName().equals("Nivel: ")) {
+                verificarMensajeValidacion(campo, mensajes.get("mensajeCampo"));
+                campo.sendKeys("-1");
+                verificarMensajeValidacion(campo, mensajes.get("mensajeNivel"));
+                campo.clear();
             } else if (campo.getAccessibleName().equals("Rol Principal: ") || campo.getAccessibleName().equals("País: ")) {
                 verificarMensajeValidacion(campo, mensajes.get("mensajeLista"));
             } else {
