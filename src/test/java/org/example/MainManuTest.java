@@ -322,7 +322,34 @@ public class MainManuTest {
         assertEquals(mensajeEsperado, validationText);
     }
 
-    //Metodo usado para que el testing sea visible para el tester,
+    private void completarRegistro(String[] usuario, List<WebElement> campos)  {
+        int i = 0;
+        for(WebElement campo : campos){
+            campo.sendKeys(usuario[i]);
+            i++;
+        }
+    }
+
+    private void verificarAlerta(String mensaje) {
+        Alert alerta = driver.switchTo().alert();
+        String alertaText = alerta.getText();
+
+        assertEquals(mensaje, alertaText);
+
+        alerta.accept();
+
+        sleep(1);
+    }
+
+    private void clickear(String xpath) {
+        driver.findElement(By.xpath(xpath)).click();
+    }
+
+    private void enviarTexto(String xpath, String texto) {
+        driver.findElement(By.xpath(xpath)).sendKeys(texto);
+    }
+
+    //Metodo usado para que el test sea visible para el tester,
     // no se remueve por si es necesario utilizarlo nuevamente
     private void sleep(int seconds){
         int ms = seconds * 1000;
