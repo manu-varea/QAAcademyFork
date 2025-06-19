@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <title>QA Academy - Lista de Jugadores</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+<nav class="navbar navbar-inverse navbar-static-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="https://kopiustech.com/es/">QA Academy</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a href="home"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+      <li><a href="registro.html"><span class="glyphicon glyphicon-list-alt"></span> Registro de Jugador</a></li>
+      <li><a href="jugadores.html"><span class="glyphicon glyphicon-user"></span> Ver Jugadores</a></li>
+      <li><a href="equipos.html"><span class="glyphicon glyphicon-upload"></span> Equipos asignados</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+          <span class="glyphicon glyphicon-user"></span> Welcome QA Trainee <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+          <li><a href="#"><span class="glyphicon glyphicon-cog"></span> Opciones </a></li>
+          <li><a href="nombre_equipo.html"><span class="glyphicon glyphicon-text-size"></span> Nombre Equipo</a></li>
+          <li><a href="panel_admin.html"><span class="glyphicon glyphicon-calendar"></span> Fecha Torneo</a></li>
+          <li><a href="home"><span class="glyphicon glyphicon-log-in"></span> Desloguear</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<div class="container">
+    <h1>Lista de Jugadores Registrados</h1>
+    <div class="panel-group">
+        <div class="panel panel-info">
+            <div class="panel-body">
+                <div id="jugadores-container">
+                    <!-- Aquí se mostrarán los jugadores -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// Función para mostrar mensaje de error
+function mostrarError(mensaje) {
+    const alertDiv = $('<div class="alert alert-danger" role="alert">' + mensaje + '</div>');
+    $('#jugadores-container').html(alertDiv);
+}
+
+// Función para mostrar los jugadores en la tabla
+function mostrarJugadores(jugadores) {
+    if (!jugadores || jugadores.length === 0) {
+        mostrarError('No hay jugadores registrados');
+        return;
+    }
+
+    const tabla = $('<table class="table table-striped table-hover">');
+    const thead = $('<thead>');
+    const tbody = $('<tbody>');
+
+    // Encabezados de la tabla
+    const trHead = $('<tr>');
+    trHead.append('<th>Nombre</th>');
+    trHead.append('<th>Email</th>');
+    trHead.append('<th>Teléfono</th>');
+    trHead.append('<th>Fecha de Registro</th>');
+    trHead.append('<th>Acciones</th>');
+    thead.append(trHead);
+
+    // Filas de la tabla
+    jugadores.forEach(jugador => {
+        const tr = $('<tr>');
+        tr.append('<td>' + jugador.nombre + '</td>');
+        tr.append('<td>' + jugador.email + '</td>');
+        tr.append('<td>' + jugador.telefono + '</td>');
+        tr.append('<td>' + new Date(jugador.fechaRegistro).toLocaleString() + '</td>');
+        
+        // Botones de acción
+        const tdAcciones = $('<td>');
+        const btnVer = $('<button class="btn btn-info btn-sm">Ver</button>');
+        const btnEliminar = $('<button class="btn btn-danger btn-sm">Eliminar</button>');
+        
+        btnVer.click(() => {
+            verJugador(jugador);
+        });
+        
+        btnEliminar.click(() => {
+            eliminarJugador(jugador.email);
+        });
+        
+        tdAcciones.append(btnVer);
+        tdAcciones.append(' ');
+        tdAcciones.append(btnEliminar);
+        tr.append(tdAcciones);
+        
+        tbody.append(tr);
+    });
+
+    tabla.append(thead);
+    tabla.append(tbody);
+    $('#jugadores-container').html(tabla);
+}
+
+// Función para obtener jugadores del servidor
+function obtenerJugadores() {
+    fetch('http://localhost:4567/api/jugadores')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Error al obtener los jugadores');
+            }
+            return response.json();
+        })
+        .then(data => {
+            mostrarJugadores(data);
+        })
+        .catch(error => {
+            mostrarError('Error: ' + error.message);
+        });
+}
+
+// Función para ver detalles de un jugador
+function verJugador(jugador) {
+    const modal = $('<div class="modal fade" id="jugadorModal" tabindex="-1" role="dialog">');
+    const modalDialog = $('<div class="modal-dialog" role="document">');
+    const modalContent = $('<div class="modal-content">');
+    const modalHeader = $('<div class="modal-header">');
+    const modalBody = $('<div class="modal-body">');
+    const modalFooter = $('<div class="modal-footer">');
+
+    modalHeader.append('<h4 class="modal-title">Detalles del Jugador</h4>');
+    modalHeader.append('<button type="button" class="close" data-dismiss="modal">&times;</button>');
+
+    const detalles = $('<div>');
+    detalles.append('<p><strong>Nombre:</strong> ' + jugador.nombre + '</p>');
+    detalles.append('<p><strong>Email:</strong> ' + jugador.email + '</p>');
+    detalles.append('<p><strong>Teléfono:</strong> ' + jugador.telefono + '</p>');
+    detalles.append('<p><strong>Fecha de Registro:</strong> ' + new Date(jugador.fechaRegistro).toLocaleString() + '</p>');
+
+    modalBody.append(detalles);
+    modalFooter.append('<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>');
+
+    modalContent.append(modalHeader);
+    modalContent.append(modalBody);
+    modalContent.append(modalFooter);
+    modalDialog.append(modalContent);
+    modal.append(modalDialog);
+
+    $('body').append(modal);
+    $('#jugadorModal').modal('show');
+}
+
+// Función para eliminar un jugador
+function eliminarJugador(email) {
+    if (confirm('¿Estás seguro de que deseas eliminar este jugador?')) {
+        fetch('http://localhost:4567/api/jugadores/' + email, {
+            method: 'DELETE'
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Error al eliminar el jugador');
+            }
+            return response.json();
+        })
+        .then(data => {
+            alert('Jugador eliminado exitosamente');
+            obtenerJugadores(); // Actualizar la lista
+        })
+        .catch(error => {
+            alert('Error: ' + error.message);
+        });
+    }
+}
+
+// Inicializar la página
+$(document).ready(function() {
+    obtenerJugadores();
+});
+</script>
+</body>
+</html>
