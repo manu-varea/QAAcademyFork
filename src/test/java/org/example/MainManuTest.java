@@ -307,9 +307,11 @@ public class MainManuTest {
         campos.add(driver.findElement(By.xpath("(//input[@name='nombre'])[1]")));
         campos.add(driver.findElement(By.xpath("(//input[@name='telefono'])[1]")));
         campos.add(driver.findElement(By.xpath("(//input[@name='email'])[1]")));
+        campos.add(driver.findElement(By.xpath("(//input[@name='discord'])[1]")));
         campos.add(driver.findElement(By.xpath("(//input[@name='ign'])[1]")));
         campos.add(driver.findElement(By.xpath("(//input[@name='nivel'])[1]")));
         campos.add(driver.findElement(By.xpath("(//select[@name='rol_principal'])[1]")));
+        campos.add(driver.findElement(By.xpath("(//select[@name='rol_secundario'])[1]")));
         campos.add(driver.findElement(By.xpath("(//select[@name='pais'])[1]")));
 
         return campos;
