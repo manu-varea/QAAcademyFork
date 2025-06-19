@@ -56,16 +56,14 @@
                 event.preventDefault();
                 
                 const nombre = document.getElementById('nombre_equipo').value;
-                const id = document.getElementById('equipo_id').value;
-                
+
                 fetch('/api/equipos', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({
-                        nombre_equipo: nombre,
-                        equipo_id: id
+                        nombre_equipo: nombre
                     })
                 })
                 .then(response => {
@@ -75,12 +73,10 @@
                     return response.json();
                 })
                 .then(data => {
-                    alert('Equipo guardado exitosamente!');
                     window.location.href = `equipo_creado.html?id=${encodeURIComponent(id)}`;
                 })
                 .catch(error => {
                     console.error('Error:', error);
-                    alert('Error al guardar el equipo');
                 });
             });
             </script>
@@ -116,24 +112,20 @@
       event.preventDefault();
       
       const nombre = document.getElementById('nombre_equipo').value;
-      const id = document.getElementById('equipo_id').value;
-      
+
       fetch('/api/equipos', {
           method: 'POST',
           headers: {
               'Content-Type': 'application/x-www-form-urlencoded',
           },
-          body: `nombre_equipo=${encodeURIComponent(nombre)}&equipo_id=${encodeURIComponent(id)}`
+          body: `nombre_equipo=${encodeURIComponent(nombre)}`
       })
       .then(response => response.json())
       .then(data => {
-          alert('Equipo guardado exitosamente!');
-          const equipoId = document.getElementById('equipo_id').value;
-          window.location.href = `equipo_creado.html?id=${encodeURIComponent(equipoId)}`;
+          window.location.href = `equipo_creado.html`;
       })
       .catch(error => {
           console.error('Error:', error);
-          alert('Error al guardar el equipo');
       });
     });
   </script>

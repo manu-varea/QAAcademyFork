@@ -6,25 +6,20 @@
   <component name="ChangeListManager">
     <list default="true" id="edbfd9cd-75ab-4258-adc5-562af579c6c7" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/controller/EquipoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/controller/EquipoController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/controller/VistasController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/controller/VistasController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/model/Equipo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/model/Equipo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/service/EquipoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/service/EquipoService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/TorneoHTML/HomePage.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/TorneoHTML/HomePage.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/TorneoHTML/crear_registro.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/TorneoHTML/crear_registro.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/TorneoHTML/equipo_creado.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/TorneoHTML/equipo_creado.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/TorneoHTML/jugadores.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/TorneoHTML/jugadores.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/TorneoHTML/mail_equipo_creado.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/TorneoHTML/mail_equipo_creado.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/TorneoHTML/mail_fecha_torneo.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/TorneoHTML/mail_fecha_torneo.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/TorneoHTML/nombre_equipo.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/TorneoHTML/panel_admin.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/TorneoHTML/panel_admin.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/TorneoHTML/registro.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/TorneoHTML/registro.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/TorneoHTML/crearEquipo.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/TorneoHTML/crearEquipo.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -44,6 +39,8 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Application.Server.executor": "Debug",
+    "JUnit.RegistroTest.executor": "Run",
+    "JUnit.RegistroTest.testCrearEquipo.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "add__backend",
@@ -51,7 +48,7 @@
     "settings.editor.selected.configurable": "preferences.keymap"
   }
 }]]></component>
-  <component name="RunManager">
+  <component name="RunManager" selected="JUnit.RegistroTest.testCrearEquipo">
     <configuration name="Server" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.example.Server" />
       <module name="Selenium" />
@@ -61,6 +58,37 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="RegistroTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Selenium" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.example.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.example" />
+      <option name="MAIN_CLASS_NAME" value="org.example.RegistroTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="RegistroTest.testCrearEquipo" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Selenium" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.example.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.example" />
+      <option name="MAIN_CLASS_NAME" value="org.example.RegistroTest" />
+      <option name="METHOD_NAME" value="testCrearEquipo" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -80,6 +108,8 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.RegistroTest.testCrearEquipo" />
+        <item itemvalue="JUnit.RegistroTest" />
         <item itemvalue="Application.Server" />
       </list>
     </recent_temporary>
@@ -101,16 +131,5 @@
       <updated>1749734210133</updated>
     </task>
     <servers />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/example/controller/EquipoController.java</url>
-          <line>57</line>
-          <option name="timeStamp" value="11" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
