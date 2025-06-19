@@ -94,4 +94,6 @@ public class User {
     public void setPais(String pais) {
         this.pais = pais;
     }
+
+    public String[] getAll() { return new String[] {getNombre(), getTelefono(), getEmail(), getDiscordUser(), getIgn(), getNivel(), getRolPrincipal(), getRolSecundario(), getPais()}; }
 }
