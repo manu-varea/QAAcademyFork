@@ -50,6 +50,40 @@
                 <button type="submit" class="btn btn-primary">Guardar Nombre</button>
                 <button type="button" class="btn btn-default" onclick="window.location.href='mail_equipo_creado.html'">Vista Previa</button>
             </form>
+
+            <script>
+            document.getElementById('equipoForm').addEventListener('submit', function(event) {
+                event.preventDefault();
+                
+                const nombre = document.getElementById('nombre_equipo').value;
+                const id = document.getElementById('equipo_id').value;
+                
+                fetch('/api/equipos', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        nombre_equipo: nombre,
+                        equipo_id: id
+                    })
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Error en el servidor');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    alert('Equipo guardado exitosamente!');
+                    window.location.href = `equipo_creado.html?id=${encodeURIComponent(id)}`;
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Error al guardar el equipo');
+                });
+            });
+            </script>
         </div>
     </div>
   </div>

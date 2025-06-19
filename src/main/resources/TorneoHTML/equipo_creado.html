@@ -38,18 +38,31 @@
 </nav>
 
 <div class="container">
-    <div class="panel-group">
-        <div class="panel panel-success">
-            <div class="panel-heading">
-                <h3 class="panel-title">¡Equipo Creado Exitosamente!</h3>
-            </div>
-            <div class="panel-body">
-                <div id="equipoInfo">
-                    <!-- Aquí se mostrará la información del equipo -->
+    <div class="row">
+        <!-- Panel del equipo creado -->
+        <div class="col-md-6">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h3 class="panel-title">¡Equipo Creado Exitosamente!</h3>
                 </div>
-                <div class="text-center">
-                    <a href="/equipos" class="btn btn-primary">Ver Equipos</a>
-                    <a href="/home" class="btn btn-default">Volver al Inicio</a>
+                <div class="panel-body">
+                    <div id="equipoInfo">
+                        <!-- Aquí se mostrará la información del equipo -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Panel de todos los equipos -->
+        <div class="col-md-6">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Todos los Equipos</h3>
+                </div>
+                <div class="panel-body">
+                    <div id="equiposList">
+                        <!-- Aquí se mostrarán todos los equipos -->
+                    </div>
                 </div>
             </div>
         </div>
@@ -58,49 +71,44 @@
 
 <script>
 window.onload = function() {
-    // Obtener el ID del equipo de la URL
-    const urlParams = new URLSearchParams(window.location.search);
-    const equipoId = urlParams.get('id');
-
-    if (!equipoId) {
-        document.getElementById('equipoInfo').innerHTML = `
-            <div class="alert alert-danger">
-                <strong>Error:</strong> No se encontró el ID del equipo en la URL
-            </div>
-        `;
-        return;
-    }
-
-    fetch(`/api/equipos/${equipoId}`)
+    // Obtener y mostrar todos los equipos
+    fetch('/api/equipos')
         .then(response => {
             if (!response.ok) {
                 throw new Error(`Error HTTP ${response.status}: ${response.statusText}`);
             }
             return response.json();
         })
-        .then(equipo => {
-            if (equipo && equipo.nombre) {
-                document.getElementById('equipoInfo').innerHTML = `
-                    <h4>Nombre del equipo: ${equipo.nombre}</h4>
-                    <p>Fecha de creación: ${new Date(equipo.fechaRegistro).toLocaleString()}</p>
-                `;
+        .then(equipos => {
+            if (Array.isArray(equipos) && equipos.length > 0) {
+                const equiposList = equipos.map(equipo => `
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">${equipo.nombre}</h4>
+                        </div>
+                        <div class="panel-body">
+                            <p>Fecha de creación: ${new Date(equipo.fechaRegistro).toLocaleString()}</p>
+                        </div>
+                    </div>
+                `).join('');
+                
+                document.getElementById('equiposList').innerHTML = equiposList;
             } else {
-                document.getElementById('equipoInfo').innerHTML = `
-                    <div class="alert alert-warning">
-                        <strong>Advertencia:</strong> No se encontró el equipo con ID ${equipoId}
+                document.getElementById('equiposList').innerHTML = `
+                    <div class="alert alert-info">
+                        No hay equipos registrados.
                     </div>
                 `;
             }
         })
         .catch(error => {
-            console.error('Error:', error);
-            document.getElementById('equipoInfo').innerHTML = `
+            document.getElementById('equiposList').innerHTML = `
                 <div class="alert alert-danger">
                     <strong>Error:</strong> ${error.message}
                 </div>
             `;
         });
-};
+}
 </script>
 </body>
 </html>

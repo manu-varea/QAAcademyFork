@@ -6,13 +6,13 @@ public class Jugador {
     private String nombre;
     private String email;
     private String telefono;
-    private LocalDateTime fechaRegistro;
+    private String fechaRegistro;
 
     public Jugador(String nombre, String email, String telefono) {
         this.nombre = nombre;
         this.email = email;
         this.telefono = telefono;
-        this.fechaRegistro = LocalDateTime.now();
+        this.fechaRegistro = LocalDateTime.now().toString();
     }
 
     // Getters
@@ -28,7 +28,7 @@ public class Jugador {
         return telefono;
     }
 
-    public LocalDateTime getFechaRegistro() {
+    public String getFechaRegistro() {
         return fechaRegistro;
     }
 

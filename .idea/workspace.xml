@@ -6,11 +6,20 @@
   <component name="ChangeListManager">
     <list default="true" id="edbfd9cd-75ab-4258-adc5-562af579c6c7" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/controller/RegistroController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/controller/EquipoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/controller/EquipoController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/controller/VistasController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/controller/VistasController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/model/Equipo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/model/Equipo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/service/EquipoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/service/EquipoService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/TorneoHTML/HomePage.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/TorneoHTML/HomePage.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/TorneoHTML/crear_registro.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/TorneoHTML/crear_registro.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/TorneoHTML/equipo_creado.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/TorneoHTML/equipo_creado.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/TorneoHTML/jugadores.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/TorneoHTML/jugadores.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/TorneoHTML/mail_equipo_creado.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/TorneoHTML/mail_equipo_creado.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/TorneoHTML/mail_fecha_torneo.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/TorneoHTML/mail_fecha_torneo.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/TorneoHTML/nombre_equipo.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/TorneoHTML/panel_admin.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/TorneoHTML/panel_admin.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/TorneoHTML/registro.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/TorneoHTML/registro.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,7 +43,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "Application.Server.executor": "Run",
+    "Application.Server.executor": "Debug",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "add__backend",
@@ -98,8 +107,8 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/org/example/controller/EquipoController.java</url>
-          <line>30</line>
-          <option name="timeStamp" value="1" />
+          <line>57</line>
+          <option name="timeStamp" value="11" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

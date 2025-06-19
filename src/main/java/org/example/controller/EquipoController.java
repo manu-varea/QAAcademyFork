@@ -15,21 +15,78 @@ public class EquipoController {
     public Object agregarEquipo(Request request, Response response) {
         response.type("application/json");
         
-        String nombre = request.queryParams("nombre_equipo");
-        int id = Integer.parseInt(request.queryParams("equipo_id"));
-        
-        equipoService.agregarEquipo(nombre, id);
-        
-        return gson.toJson(Map.of(
-            "status", "success",
-            "message", "Equipo agregado exitosamente",
-            "equipo", Map.of("nombre", nombre, "id", id)
-        ));
+        try {
+            // Intentar obtener datos de JSON
+            String body = request.body();
+            if (body == null || body.isEmpty()) {
+                throw new IllegalArgumentException("No se recibieron datos");
+            }
+            
+            Map<String, String> datos = gson.fromJson(body, Map.class);
+            String nombre = datos.get("nombre_equipo");
+
+            if (nombre == null || nombre.trim().isEmpty()) {
+                throw new IllegalArgumentException("Nombre del equipo es requerido");
+            }
+            
+
+            equipoService.agregarEquipo(nombre);
+            
+            return gson.toJson(Map.of(
+                "status", "success",
+                "message", "Equipo agregado exitosamente",
+                "equipo", Map.of("nombre", nombre)
+            ));
+            
+        } catch (IllegalArgumentException e) {
+            response.status(400);
+            return gson.toJson(Map.of(
+                "status", "error",
+                "message", e.getMessage()
+            ));
+        } catch (Exception e) {
+            response.status(500);
+            return gson.toJson(Map.of(
+                "status", "error",
+                "message", "Error interno del servidor",
+                "error", e.getMessage()
+            ));
+        }
     }
 
     public Object obtenerEquipos(Request request, Response response) {
         response.type("application/json");
         List<Equipo> equipos = equipoService.obtenerEquipos();
         return gson.toJson(equipos);
+    }
+
+    public Object obtenerEquipoPorId(Request request, Response response) {
+        response.type("application/json");
+        try {
+            String nombre = String.valueOf(request.params("nombre"));
+            Equipo equipo = equipoService.buscarEquipo(nombre);
+            if (equipo != null) {
+                return gson.toJson(equipo);
+            } else {
+                response.status(404);
+                return gson.toJson(Map.of(
+                    "status", "error",
+                    "message", "Equipo no encontrado"
+                ));
+            }
+        } catch (NumberFormatException e) {
+            response.status(400);
+            return gson.toJson(Map.of(
+                "status", "error",
+                "message", "ID inválido"
+            ));
+        } catch (Exception e) {
+            response.status(500);
+            return gson.toJson(Map.of(
+                "status", "error",
+                "message", "Error interno del servidor",
+                "error", e.getMessage()
+            ));
+        }
     }
 }

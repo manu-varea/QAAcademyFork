@@ -6,24 +6,26 @@ import java.util.List;
 
 public class EquipoService {
     private static final List<Equipo> equipos = new ArrayList<>();
+    private static final Object lock = new Object();
 
-    public void agregarEquipo(String nombre, int id) {
-        Equipo nuevoEquipo = new Equipo(nombre, id);
+    public void agregarEquipo(String nombre) {
+        if (nombre == null || nombre.trim().isEmpty()) {
+            throw new IllegalArgumentException("El nombre del equipo no puede estar vacío");
+        }
+        Equipo nuevoEquipo = new Equipo(nombre);
         equipos.add(nuevoEquipo);
     }
 
     public List<Equipo> obtenerEquipos() {
-        return new ArrayList<>(equipos);
+        return equipos;
     }
 
-    public void eliminarEquipo(int id) {
-        equipos.removeIf(equipo -> equipo.getId() == id);
+    public void eliminarEquipo(String nombre) {
+        equipos.remove(nombre);
     }
 
-    public Equipo buscarEquipo(int id) {
-        return equipos.stream()
-                .filter(equipo -> equipo.getId() == id)
-                .findFirst()
-                .orElse(null);
+    public Equipo buscarEquipo(String nombre) {
+        return equipos.stream().filter(equipo -> equipo.getNombre().equals(nombre)).findFirst().orElse(null);
     }
+
 }

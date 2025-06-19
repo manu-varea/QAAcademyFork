@@ -33,14 +33,18 @@ public class Server {
         // Rutas para páginas HTML
         get("/", vistasController::getHomePage);
         get("/home", vistasController::getHomePage);
-        get("/nombre_equipo", vistasController::getNombreEquipoPage);
-        get("/nombre_equipo.html", vistasController::getNombreEquipoPage);
+        get("/crearEquipo", vistasController::getNombreEquipoPage);
+        get("/crearEquipo.html", vistasController::getNombreEquipoPage);
         get("/registro", vistasController::getRegistroPage);
         get("/registro.html", vistasController::getRegistroPage);
         get("/equipos", vistasController::getEquiposPage);
         get("/equipos.html", vistasController::getEquiposPage);
+        get("/jugadores", vistasController::getJugadoresPage);
+        get("/jugadores.html", vistasController::getJugadoresPage);
         get("/panel_admin", vistasController::getPanelAdminPage);
         get("/panel_admin.html", vistasController::getPanelAdminPage);
+        get("/equipo_creado", vistasController::getEquipoCreadoPage);
+        get("/equipo_creado.html", vistasController::getEquipoCreadoPage);
         
         // Endpoints para registros
         post("/api/jugadores", registrarJugadorController::registrarJugador);
@@ -51,6 +55,7 @@ public class Server {
         // Endpoints para equipos
         post("/api/equipos", equipoController::agregarEquipo);
         get("/api/equipos", equipoController::obtenerEquipos);
+        get("/api/equipos/:id", equipoController::obtenerEquipoPorId);
         
         System.out.println("Servidor iniciado en http://localhost:4567");
     }
