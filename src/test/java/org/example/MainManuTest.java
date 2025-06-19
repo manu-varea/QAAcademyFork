@@ -1,10 +1,7 @@
 package org.example;
 
 import org.junit.jupiter.api.*;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.Alert;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.net.URISyntaxException;
@@ -47,73 +44,34 @@ public class MainManuTest {
     public void continuidadTest(){
 
         driver.get(pathTorneoHTML+"HomePage.html");
-        driver.findElement(By.xpath("(//a[normalize-space()='Registro de Jugador'])[1]")).click();
+        clickear("(//a[normalize-space()='Registro de Jugador'])[1]");
         List<User> usuarios = obtenerUsuarios();
 
         //1. Cargo los 5 jugadores.
         for(User usuario : usuarios) {
+            completarRegistro(usuario.getAll(), obtenerCampos());
 
-            WebElement fieldNombre = driver.findElement(By.xpath("(//input[@name='nombre'])[1]"));
-            fieldNombre.sendKeys(usuario.getNombre());
+            clickear("(//button[normalize-space()='Registrarse'])[1]");
 
-            WebElement fieldTelefono = driver.findElement(By.xpath("(//input[@name='telefono'])[1]"));
-            fieldTelefono.sendKeys(usuario.getTelefono());
+            String mensaje = "Formulario enviado con éxito. ¡Gracias por registrarte!";
 
-            WebElement fieldEmail = driver.findElement(By.xpath("(//input[@name='email'])[1]"));
-            fieldEmail.sendKeys(usuario.getEmail());
-
-            WebElement fieldDiscord = driver.findElement(By.xpath("(//input[@name='discord'])[1]"));
-            fieldDiscord.sendKeys(usuario.getDiscordUser());
-
-            WebElement fieldIgn = driver.findElement(By.xpath("(//input[@name='ign'])[1]"));
-            fieldIgn.sendKeys(usuario.getIgn());
-
-            WebElement fieldNivel = driver.findElement(By.xpath("(//input[@name='nivel'])[1]"));
-            fieldNivel.sendKeys(usuario.getNivel());
-
-            WebElement fieldRol1 = driver.findElement(By.xpath("(//select[@name='rol_principal'])[1]"));
-            fieldRol1.sendKeys(usuario.getRolPrincipal());
-
-            WebElement fieldRol2 = driver.findElement(By.xpath("(//select[@name='rol_secundario'])[1]"));
-            fieldRol2.sendKeys(usuario.getRolSecundario());
-
-            WebElement fieldPais = driver.findElement(By.xpath("(//select[@name='pais'])[1]"));
-            fieldPais.sendKeys(usuario.getPais());
-
-            WebElement botonSubmit = driver.findElement(By.xpath("(//button[normalize-space()='Registrarse'])[1]"));
-            botonSubmit.click();
-
-            Alert alerta = driver.switchTo().alert();
-            String alertaText = alerta.getText();
-
-            assertEquals("Formulario enviado con éxito. ¡Gracias por registrarte!", alertaText);
-
-            alerta.accept();
+            verificarAlerta(mensaje);
         }
         //2.Voy a Equipos Asignados, me fijo que aparezcan.
-        driver.findElement(By.xpath("(//a[normalize-space()='Equipos asignados'])[1]")).click();
+        clickear("(//a[normalize-space()='Equipos asignados'])[1]");
 
         //3. Voy al header, Cambiar nombre.
-        WebElement dropDown = driver.findElement(By.xpath("(//a[normalize-space()='Welcome QA Trainee'])[1]"));
-        dropDown.click();
+        clickear("(//a[normalize-space()='Welcome QA Trainee'])[1]");
 
-        WebElement botonNombre = driver.findElement(By.xpath("(//a[normalize-space()='Nombre Equipo'])[1]"));
-        botonNombre.click();
+        clickear("(//a[normalize-space()='Nombre Equipo'])[1]");
 
-        WebElement inputNombre = driver.findElement(By.xpath("(//input[@name='nombre_equipo'])[1]"));
-        inputNombre.sendKeys("LosQA");
+        enviarTexto("(//input[@name='nombre_equipo'])[1]", "LosQA");
 
         //4. Le doy a guardar nombre.
-        WebElement botonGuardar = driver.findElement(By.xpath("(//button[normalize-space()='Guardar Nombre'])[1]"));
-        botonGuardar.click();
+        clickear("(//button[normalize-space()='Guardar Nombre'])[1]");
 
         //5.Valido mensaje exitoso
-        Alert alerta = driver.switchTo().alert();
-        String alertaText = alerta.getText();
-
-        assertEquals("Nombre del equipo guardado correctamente.", alertaText);
-
-        alerta.accept();
+        verificarAlerta("Nombre del equipo guardado correctamente.");
 
         //6. Valido que los datos del equipo sean correctos.
         String msgActual = driver.findElement(By.xpath("//div[@class='panel-body']/dl/p[2]")).getText();
@@ -142,48 +100,19 @@ public class MainManuTest {
 
         List<User> usuarios = obtenerUsuarios();
         driver.get(pathTorneoHTML+"HomePage.html");
-        driver.findElement(By.xpath("(//a[normalize-space()='Registro de Jugador'])[1]")).click();
+        clickear("(//a[normalize-space()='Registro de Jugador'])[1]");
 
         for(User usuario : usuarios) {
 
-            WebElement fieldNombre = driver.findElement(By.xpath("(//input[@name='nombre'])[1]"));
-            fieldNombre.sendKeys(usuario.getNombre());
+            completarRegistro(usuario.getAll(), obtenerCampos());
 
-            WebElement fieldTelefono = driver.findElement(By.xpath("(//input[@name='telefono'])[1]"));
-            fieldTelefono.sendKeys(usuario.getTelefono());
+            clickear("(//button[normalize-space()='Registrarse'])[1]");
 
-            WebElement fieldEmail = driver.findElement(By.xpath("(//input[@name='email'])[1]"));
-            fieldEmail.sendKeys(usuario.getEmail());
+            String mensaje = "Formulario enviado con éxito. ¡Gracias por registrarte!";
 
-            WebElement fieldDiscord = driver.findElement(By.xpath("(//input[@name='discord'])[1]"));
-            fieldDiscord.sendKeys(usuario.getDiscordUser());
-
-            WebElement fieldIgn = driver.findElement(By.xpath("(//input[@name='ign'])[1]"));
-            fieldIgn.sendKeys(usuario.getIgn());
-
-            WebElement fieldNivel = driver.findElement(By.xpath("(//input[@name='nivel'])[1]"));
-            fieldNivel.sendKeys(usuario.getNivel());
-
-            WebElement fieldRol1 = driver.findElement(By.xpath("(//select[@name='rol_principal'])[1]"));
-            fieldRol1.sendKeys(usuario.getRolPrincipal());
-
-            WebElement fieldRol2 = driver.findElement(By.xpath("(//select[@name='rol_secundario'])[1]"));
-            fieldRol2.sendKeys(usuario.getRolSecundario());
-
-            WebElement fieldPais = driver.findElement(By.xpath("(//select[@name='pais'])[1]"));
-            fieldPais.sendKeys(usuario.getPais());
-
-            WebElement botonSubmit = driver.findElement(By.xpath("(//button[normalize-space()='Registrarse'])[1]"));
-            botonSubmit.click();
-
-            Alert alerta = driver.switchTo().alert();
-            String alertaText = alerta.getText();
-
-            assertEquals("Formulario enviado con éxito. ¡Gracias por registrarte!", alertaText);
-
-            alerta.accept();
+            verificarAlerta(mensaje);
         }
-        driver.findElement(By.xpath("(//a[normalize-space()='Equipos asignados'])[1]")).click();
+        clickear("(//a[normalize-space()='Equipos asignados'])[1]");
     }
 
     @Test
@@ -191,24 +120,18 @@ public class MainManuTest {
     public void equiposYNombreTest(){
         driver.get(pathTorneoHTML+"equipos.html");
 
-        WebElement dropDown = driver.findElement(By.xpath("(//a[normalize-space()='Welcome QA Trainee'])[1]"));
-        dropDown.click();
+        clickear("(//a[normalize-space()='Welcome QA Trainee'])[1]");
 
-        WebElement botonNombre = driver.findElement(By.xpath("(//a[normalize-space()='Nombre Equipo'])[1]"));
-        botonNombre.click();
+        clickear("(//a[normalize-space()='Nombre Equipo'])[1]");
 
-        WebElement inputNombre = driver.findElement(By.xpath("(//input[@name='nombre_equipo'])[1]"));
-        inputNombre.sendKeys("LosQA");
+        enviarTexto("(//input[@name='nombre_equipo'])[1]", "LosQA");
 
-        WebElement botonGuardar = driver.findElement(By.xpath("(//button[normalize-space()='Guardar Nombre'])[1]"));
-        botonGuardar.click();
+        clickear("(//button[normalize-space()='Guardar Nombre'])[1]");
 
-        Alert alerta = driver.switchTo().alert();
-        String alertaText = alerta.getText();
+        String mensaje = "Nombre del equipo guardado correctamente.";
 
-        assertEquals("Nombre del equipo guardado correctamente.", alertaText);
+        verificarAlerta(mensaje);
 
-        alerta.accept();
     }
 
     @Test
@@ -240,6 +163,7 @@ public class MainManuTest {
             assertEquals(jugadorExpected, jugadorActual);
             i++;
         }
+
     }
 
     @Test
@@ -273,8 +197,7 @@ public class MainManuTest {
         WebElement boton = driver.findElement(By.xpath("(//button[normalize-space()='Registrarse'])[1]"));
         List<WebElement> campos = obtenerCampos();
         Map<String, String> mensajes = obtenerMensajes();
-        String[] usuario = {"Andres", "1122227788", "test.com",
-                "axdny", "85", "Top", "Argentina"};
+        String[] usuario = obtenerUsuarios().getFirst().getAll();
         int i = 0;
 
         for (WebElement campo : campos) {
@@ -285,7 +208,7 @@ public class MainManuTest {
             boton.click();
             if (campo.getAccessibleName().equals("Email: ")) {
                 verificarMensajeValidacion(campo, mensajes.get("mensajeCampo"));
-                campo.sendKeys("andres");
+                campo.sendKeys("a");
                 verificarMensajeValidacion(campo, mensajes.get("mensajeMail"));
                 campo.sendKeys("@");
                 verificarMensajeValidacion(campo, mensajes.get("mensajeMail2"));
@@ -307,7 +230,7 @@ public class MainManuTest {
         driver.switchTo().alert().accept();
     }
 
-    private List<User> obtenerUsuarios(){
+    private List<User> obtenerUsuarios() {
 
         List<User> usuarios = new ArrayList<>();
 
@@ -325,7 +248,7 @@ public class MainManuTest {
         return usuarios;
     }
 
-    private List<WebElement> obtenerCampos(){
+    private List<WebElement> obtenerCampos() {
 
         List<WebElement> campos = new ArrayList<>();
 
@@ -389,7 +312,7 @@ public class MainManuTest {
 
     //Metodo usado para que el test sea visible para el tester,
     // no se remueve por si es necesario utilizarlo nuevamente
-    private void sleep(int seconds){
+    private void sleep(int seconds) {
         int ms = seconds * 1000;
         try{
           Thread.sleep(ms);
