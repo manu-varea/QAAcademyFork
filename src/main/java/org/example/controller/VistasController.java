@@ -2,15 +2,21 @@ package org.example.controller;
 
 import spark.Request;
 import spark.Response;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+
+import java.io.InputStream;
+import java.io.FileNotFoundException;
+import java.nio.charset.StandardCharsets;
+
 
 public class VistasController {
     public Object getHomePage(Request request, Response response) {
         try {
-            String path = getClass().getResource("/TorneoHTML/HomePage.html").toURI().getPath();
-            return new String(Files.readAllBytes(Paths.get(path)));
+            InputStream input = getClass().getResourceAsStream("/TorneoHTML/HomePage.html");
+            if (input == null) {
+                throw new FileNotFoundException("Recurso no encontrado");
+            }
+            return new String(input.readAllBytes(), StandardCharsets.UTF_8);
+
         } catch (Exception e) {
             e.printStackTrace();
             return "Error al cargar la página";
@@ -19,8 +25,12 @@ public class VistasController {
 
     public Object getNombreEquipoPage(Request request, Response response) {
         try {
-            String path = getClass().getResource("/TorneoHTML/crearEquipo.html").toURI().getPath();
-            return new String(Files.readAllBytes(Paths.get(path)));
+            InputStream input = getClass().getResourceAsStream("/TorneoHTML/crearEquipo.html");
+            if (input == null) {
+                throw new FileNotFoundException("Recurso no encontrado");
+            }
+            return new String(input.readAllBytes(), StandardCharsets.UTF_8);
+
         } catch (Exception e) {
             e.printStackTrace();
             return "Error al cargar la página";
@@ -29,8 +39,12 @@ public class VistasController {
 
     public Object getRegistroPage(Request request, Response response) {
         try {
-            String path = getClass().getResource("/TorneoHTML/crear_registro.html").toURI().getPath();
-            return new String(Files.readAllBytes(Paths.get(path)));
+            InputStream input = getClass().getResourceAsStream("/TorneoHTML/crear_registro.html");
+            if (input == null) {
+                throw new FileNotFoundException("Recurso no encontrado");
+            }
+            return new String(input.readAllBytes(), StandardCharsets.UTF_8);
+
         } catch (Exception e) {
             e.printStackTrace();
             return "Error al cargar la página";
@@ -39,8 +53,12 @@ public class VistasController {
 
     public Object getEquiposPage(Request request, Response response) {
         try {
-            String path = getClass().getResource("/TorneoHTML/equipos.html").toURI().getPath();
-            return new String(Files.readAllBytes(Paths.get(path)));
+            InputStream input = getClass().getResourceAsStream("/TorneoHTML/equipos.html");
+            if (input == null) {
+                throw new FileNotFoundException("Recurso no encontrado");
+            }
+            return new String(input.readAllBytes(), StandardCharsets.UTF_8);
+
         } catch (Exception e) {
             e.printStackTrace();
             return "Error al cargar la página";
@@ -49,8 +67,12 @@ public class VistasController {
 
     public Object getJugadoresPage(Request request, Response response) {
         try {
-            String path = getClass().getResource("/TorneoHTML/jugadores.html").toURI().getPath();
-            return new String(Files.readAllBytes(Paths.get(path)));
+            InputStream input = getClass().getResourceAsStream("/TorneoHTML/jugadores.html");
+            if (input == null) {
+                throw new FileNotFoundException("Recurso no encontrado");
+            }
+            return new String(input.readAllBytes(), StandardCharsets.UTF_8);
+
         } catch (Exception e) {
             e.printStackTrace();
             return "Error al cargar la página";
@@ -59,8 +81,12 @@ public class VistasController {
 
     public Object getPanelAdminPage(Request request, Response response) {
         try {
-            String path = getClass().getResource("/TorneoHTML/panel_admin.html").toURI().getPath();
-            return new String(Files.readAllBytes(Paths.get(path)));
+            InputStream input = getClass().getResourceAsStream("/TorneoHTML/panel_admin.html");
+            if (input == null) {
+                throw new FileNotFoundException("Recurso no encontrado");
+            }
+            return new String(input.readAllBytes(), StandardCharsets.UTF_8);
+
         } catch (Exception e) {
             e.printStackTrace();
             return "Error al cargar la página";
@@ -69,8 +95,12 @@ public class VistasController {
 
     public Object getEquipoCreadoPage(Request request, Response response) {
         try {
-            String path = getClass().getResource("/TorneoHTML/equipo_creado.html").toURI().getPath();
-            return new String(Files.readAllBytes(Paths.get(path)));
+            InputStream input = getClass().getResourceAsStream("/TorneoHTML/equipo_creado.html");
+            if (input == null) {
+                throw new FileNotFoundException("Recurso no encontrado");
+            }
+            return new String(input.readAllBytes(), StandardCharsets.UTF_8);
+
         } catch (Exception e) {
             e.printStackTrace();
             return "Error al cargar la página";
