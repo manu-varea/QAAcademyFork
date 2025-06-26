@@ -4,7 +4,6 @@ import org.example.controller.RegistrarJugadorController;
 import org.example.controller.EquipoController;
 import org.example.controller.VistasController;
 
-import static org.openqa.selenium.remote.http.Route.options;
 import static spark.Spark.*;
 
 public class Server {
