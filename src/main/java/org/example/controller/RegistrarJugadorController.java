@@ -15,19 +15,16 @@ public class RegistrarJugadorController {
     public Object registrarJugador(Request request, Response response) {
         response.type("application/json");
         
-        System.out.println("Nombre: " + request.queryParams("nombre"));
-        System.out.println("Email: " + request.queryParams("email"));
-        System.out.println("Telefono: " + request.queryParams("telefono"));
-
-        String nombre = request.queryParams("nombre");
-        String email = request.queryParams("email");
-        String telefono = request.queryParams("telefono");
+        // Leer el cuerpo de la petición como JSON
+        String body = request.body();
+        Jugador jugador = gson.fromJson(body, Jugador.class);
         
         System.out.println("Agregando registro..." );
-        jugadorService.registrarJugador(nombre, email, telefono);
+        jugadorService.registrarJugador(jugador.getNombre(), jugador.getEmail(), jugador.getTelefono());
         System.out.println("Registro Agregado..." );
         
-        return gson.toJson(Map.of("status", "success", "message", "Jugador registrado exitosamente"));
+        // Devolver el jugador creado con su nombre como identificador
+        return gson.toJson(Map.of("nombre", jugador.getNombre(), "email", jugador.getEmail(), "telefono", jugador.getTelefono()));
     }
 
     public Object obtenerJugadores(Request request, Response response) {
