@@ -11,6 +11,7 @@ import java.io.IOException;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.example.config.TestConfig;
 import com.google.gson.reflect.TypeToken;
+import org.example.model.Jugador;
 
 import java.util.List;
 import java.util.Map;
@@ -21,8 +22,19 @@ public class DemoSteps {
     private String playerNombre;
 
     @Given("the server is running")
-    public void theServerIsRunning() {
-        // El servidor ya está inicializado por TestConfig
+    public void theServerIsRunning() throws IOException {
+        // Verificar que el servidor está funcionando
+        CloseableHttpClient httpClient = HttpClients.createDefault();
+        HttpGet httpGet = new HttpGet(SERVER_URL + "/");
+        
+        try {
+            CloseableHttpResponse response = httpClient.execute(httpGet);
+            if (response.getStatusLine().getStatusCode() != 200) {
+                throw new AssertionError("Server is not running. Expected status code 200, but got " + response.getStatusLine().getStatusCode());
+            }
+        } catch (IOException e) {
+            throw new AssertionError("Could not connect to server. Server might not be running.", e);
+        }
     }
 
     @When("I create a jugador with name {string} mail {string} and phone {string}")
@@ -85,22 +97,4 @@ public class DemoSteps {
             throw new AssertionError("Jugador data does not match expected values");
         }
     }
-
-
-    private static class Jugador {
-        private String nombre;
-        private String email;
-        private String telefono;
-
-        public Jugador(String nombre, String email, String telefono) {
-            this.nombre = nombre;
-            this.email = email;
-            this.telefono = telefono;
-        }
-
-        public String getNombre() { return nombre; }
-        public String getEmail() { return email; }
-        public String getTelefono() { return telefono; }
-    }
-
 }
