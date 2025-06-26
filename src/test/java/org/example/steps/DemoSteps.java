@@ -89,7 +89,7 @@ public class DemoSteps {
         }
 
         // Tomar el primer jugador y verificar los datos
-        Jugador createdJugador = jugadores.get(0);
+        Jugador createdJugador =  jugadores.stream().filter(jugador -> jugador.getNombre().equals(expectedName)).findFirst().get();
 
         if (!createdJugador.getNombre().equals(expectedName) ||
                 !createdJugador.getEmail().equals(expectedMail) ||
