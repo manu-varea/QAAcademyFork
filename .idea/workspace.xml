@@ -4,10 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="edbfd9cd-75ab-4258-adc5-562af579c6c7" name="Changes" comment="">
+    <list default="true" id="edbfd9cd-75ab-4258-adc5-562af579c6c7" name="Changes" comment="created test classes">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/org/example/steps/DemoSteps.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/example/steps/DemoSteps.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/features/demo.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/features/demo.feature" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Server.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,10 +23,18 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="add_backend" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
@@ -36,18 +45,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.Server.executor&quot;: &quot;Debug&quot;,
-    &quot;JUnit.RegistroTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.RegistroTest.testCrearEquipo.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;add__backend&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Server.executor": "Debug",
+    "JUnit.RegistroTest.executor": "Run",
+    "JUnit.RegistroTest.testCrearEquipo.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "add__backend",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/ManuelVarea/Desktop/Automation/workspace/QAAcademyFork/src/test/java/org/example",
+    "settings.editor.selected.configurable": "preferences.keymap"
   }
-}</component>
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\ManuelVarea\Desktop\Automation\workspace\QAAcademyFork\src\test\java\org\example" />
+      <recent name="C:\Users\ManuelVarea\Desktop\Automation\workspace\QAAcademyFork\src\test\resources" />
+      <recent name="C:\Users\ManuelVarea\Desktop\Automation\workspace\QAAcademyFork\src\main\resources" />
+      <recent name="C:\Users\ManuelVarea\Desktop\Automation\workspace\QAAcademyFork\src\main\java\org\example" />
+      <recent name="C:\Users\ManuelVarea\Desktop\Automation\workspace\QAAcademyFork" />
+    </key>
+  </component>
   <component name="RunManager" selected="Application.Server">
     <configuration name="Server" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.example.Server" />
@@ -130,9 +149,56 @@
       <option name="presentableId" value="Default" />
       <updated>1749734210133</updated>
     </task>
+    <task id="LOCAL-00001" summary="modification on methods to get URLs">
+      <option name="closed" value="true" />
+      <created>1750950447149</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1750950447149</updated>
+    </task>
+    <task id="LOCAL-00002" summary="added 'elements' directory and a class for each page">
+      <option name="closed" value="true" />
+      <created>1750950884855</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1750950884855</updated>
+    </task>
+    <task id="LOCAL-00003" summary="updated chromedrivers">
+      <option name="closed" value="true" />
+      <created>1750951569328</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1750951569328</updated>
+    </task>
+    <task id="LOCAL-00004" summary="created class User">
+      <option name="closed" value="true" />
+      <created>1750952226518</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1750952226518</updated>
+    </task>
+    <task id="LOCAL-00005" summary="created test classes">
+      <option name="closed" value="true" />
+      <created>1750952581144</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1750952581144</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
-    <option name="LAST_COMMIT_MESSAGE" value="" />
+    <MESSAGE value="modification on methods to get URLs" />
+    <MESSAGE value="added 'elements' folder and a class for each page" />
+    <MESSAGE value="added 'elements' directory and a class for each page" />
+    <MESSAGE value="updated chromedrivers" />
+    <MESSAGE value="created class User" />
+    <MESSAGE value="created test classes" />
+    <option name="LAST_COMMIT_MESSAGE" value="created test classes" />
   </component>
 </project>
